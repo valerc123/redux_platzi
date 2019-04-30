@@ -7,8 +7,8 @@ $form.addEventListener('submit', handleSubmit);
 function handleSubmit(event)
 {
     event.preventDefault();
-    const data = new FormData($form);
-    const title = data.get('title')
+    const data = new FormData($form); // guarda los datos del formulario
+    const title = data.get('titles') // obtener title de form
     console.log(title)
 
     //action

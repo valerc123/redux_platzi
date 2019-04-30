@@ -33,6 +33,6 @@ const homeContainer = document.getElementById('home-container');
   
 render (  
     <Provider store={store}> 
-        <p>holiii</p>
-        {/* <Home /> */}
-    </Provider> ,homeContainer);
+        {/* <p>holiii</p> */}
+        <Home />
+    </Provider> , homeContainer);
