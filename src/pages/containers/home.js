@@ -1,11 +1,13 @@
-import React, {Component} from 'react'
-import HomeLayout from '../components/home-layout'
-import Categories from '../../categories/components/categories'
+import React, {Component} from 'react';
+import HomeLayout from '../components/home-layout';
+import Categories from '../../categories/components/categories';
 import Related from '../components/related';
 import PortalContainer from '../../widgets/containers/portal';
 import Modal from "../../widgets/components/modal";
 import HandleError from "../../error/containers/handleError";
 import VideoPlayer from '../../player/containers/video-player';
+
+import { connect } from 'react-redux';
 
 class Home extends Component{
     state = {
@@ -29,8 +31,9 @@ class Home extends Component{
             <HandleError>
                 <HomeLayout>
                     <Related />
-                    <Categories categories={this.props.data.categories} 
-                    handleOpenModal ={this.handleOpenModal} />
+                    <Categories categories={this.props.categories} 
+                    handleOpenModal ={this.handleOpenModal} 
+                    search={this.props.search}/>
                     {
                     this.state.modalVisible &&
                     <PortalContainer>
@@ -48,4 +51,11 @@ class Home extends Component{
     }
 }  
 
-export default Home
+function mapStateToProps(state, props){
+    return{
+        categories: state.data.categories, // data desde el store de redux
+        search: state.search
+    }
+}
+
+export default connect(mapStateToProps)(Home)
