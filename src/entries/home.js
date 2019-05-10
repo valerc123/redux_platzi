@@ -9,6 +9,9 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux'; // componenten de orden superior
 import reducer from '../reducers/data';
 
+import normalizedData from '../schemas/index';
+console.log(normalizedData);
+
 const initialState = {
     //modelo de datos 
     data: {

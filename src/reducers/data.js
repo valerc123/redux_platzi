@@ -12,8 +12,8 @@ function data(state, action){
             // }
 
             if (action.payload.query) {
-                const categories = state.data.categories
-                categories.map(category => {
+                const list = state.data.categories
+                list.map(category => {
                   let tempResults = category.playlist.filter(item => {
                     return item.author.toLowerCase().includes(action.payload.query.toLowerCase())
                   })
