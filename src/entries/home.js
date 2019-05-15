@@ -4,18 +4,21 @@ import React from 'react';
 import {render} from 'react-dom';
 import Home from "../pages/containers/home";
 // import Playlist from '../playlist/componets/playlist';
-import data from '../api.json';
+// import data from '../api.json';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'; // componenten de orden superior
 import reducer from '../reducers/data';
 
 import normalizedData from '../schemas/index';
-console.log(normalizedData);
+console.log(normalizedData, "datos normalizados"); //muestro en consola los datos normalizados
+// console.log(data, "Datos no normalizados")
 
 const initialState = {
     //modelo de datos 
     data: {
-        ...data, // descompongo la api
+        // ...normalizedData, // descompongo la api
+        entities: normalizedData.entities,
+        categories: normalizedData.result.categories
     },
     search: []
 }
