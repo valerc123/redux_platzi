@@ -1,6 +1,6 @@
 import React from 'react';
 // import Media from './media.js';
-import MediaContainer  from '../container/media';
+import MediaContainer  from '../containers/mediaContainer';
 import './playlist.css';
 
 //componente funcional
@@ -10,8 +10,8 @@ import './playlist.css';
         {
             props.playlist.map((mediaId) =>{
                 return <MediaContainer 
-                    openModal={props.handleOpenModal} 
-                    id={mediaId} />
+                    openModal={props.handleOpenModal} id={mediaId} />
+                   
             })
         }
         </div>
