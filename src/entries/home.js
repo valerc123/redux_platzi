@@ -7,25 +7,30 @@ import Home from "../pages/containers/home";
 // import data from '../api.json';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'; // componenten de orden superior
-import reducer from '../reducers/data';
+import reducers from '../reducers/index';
+import { Map as map } from 'immutable'
 
-import normalizedData from '../schemas/index';
-console.log(normalizedData, "datos normalizados"); //muestro en consola los datos normalizados
+// import normalizedData from '../schemas/index';
+// console.log(normalizedData, "datos normalizados"); //muestro en consola los datos normalizados
 // console.log(data, "Datos no normalizados")
 
-const initialState = {
-    //modelo de datos 
-    data: {
-        // ...normalizedData, // descompongo la api
-        entities: normalizedData.entities,
-        categories: normalizedData.result.categories
-    },
-    search: []
-}
+// const initialState = {
+//     //modelo de datos 
+//     data: {
+//         // ...normalizedData, // descompongo la api
+//         entities: normalizedData.entities,
+//         categories: normalizedData.result.categories,
+//         search: [], 
+//     },
+//     modal:{
+//         visibility: false,
+//         mediaId: null,
+//     } // cada key es un reducer
+// }
 
 const store = createStore(
-    reducer, //(state) => state (simpre debe devolver el estado)
-    initialState,// estado inicial
+    reducers, //(state) => state (simpre debe devolver el estado)
+    map(),// estado inicial
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()//enhancer
 
 );

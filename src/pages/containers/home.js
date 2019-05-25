@@ -16,7 +16,7 @@ class Home extends Component{
     handleOpenModal=(media) =>{
         this.setState({
             modalVisible: true,
-            media // es lo mismo media: media
+            media: media // es lo mismo media: media
         })
     }
     
@@ -52,13 +52,15 @@ class Home extends Component{
 }  
 
 function mapStateToProps(state, props){
-    const categories = state.data.categories.map((categoryId) => {
-        return state.data.entities.categories[categoryId]
+    const categories = state.get('data').get('categories').map((categoryId) => {
+        return state.get('data').get('entities').get('categories').get('categoryId')
     })
     return{
         categories:  categories, //state.data.categories // data desde el store de redux
-        search: state.search
+        search: state.get('data').get('search')
     }
 }
 
 export default connect(mapStateToProps)(Home)
+
+

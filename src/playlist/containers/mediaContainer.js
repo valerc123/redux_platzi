@@ -5,14 +5,22 @@ import { connect } from 'react-redux'
 
 class MediaContainer extends Component {
     render(){
-
-        return <Media {...this.props.data} />
-
+        console.log({...this.props.data.toJS()}) // solo para verificar los datos
+        return <Media
+        category  = {this.props.data.get('category')}
+        author = {this.props.data.get('author')}
+        cover  = {this.props.data.get('cover')}
+        id     = {this.props.data.get('id')}
+        src    = {this.props.data.get('src')}
+        type   = {this.props.data.get('type')}
+        key    = {this.props.data.get('id')} 
+        title  = {this.props.data.get('title')} />
     }
 }
 function mapStateToProps(state, props){  //mapeo el stado de redux para mandarlo como propiedad en este componente 
     return{
-        data: state.data.entities.media[props.id]
+        data: state.getIn(['data', 'entities', 'media', props.id]) //datos anidados es igual
+        // data: state.get('data').get('entities').get('media').get(props.id)
     }
 }
 export default connect(mapStateToProps)(MediaContainer)

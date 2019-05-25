@@ -11,7 +11,13 @@ function Categories (props)
             <SearchContainer  />
             {
                 props.search.map((item)=>{
-                    return <Media {...item} key={item.id} />
+                    return <Media
+                    title  = {item.get('title')}
+                    author = {item.get('author')}
+                    type   = {item.get('type')}
+                    cover  = {item.get('cover')}
+                    src    = {item.get('src')}
+                    key    = {item.get('id')} />
                 })
             }
             {
@@ -19,8 +25,10 @@ function Categories (props)
                 {
                    return (
                    <Category 
-                        key={item.id} 
-                        {...item}
+                        key={item.get('id')} 
+                        description={item.get('description')}
+                        title={item.get('title')}
+                        playlist={item.get('playlist')}
                         handleOpenModal={props.handleOpenModal}
                    />
                    )
