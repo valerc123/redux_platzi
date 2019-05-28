@@ -18,9 +18,12 @@ const initialState = {
     data: {
         // ...normalizedData, // descompongo la api
         entities: normalizedData.entities,
-        categories: normalizedData.result.categories
+        categories: normalizedData.result.categories,
+        search: [],
     },
-    search: []
+    modal: {
+        
+    }
 }
 
 const store = createStore(
