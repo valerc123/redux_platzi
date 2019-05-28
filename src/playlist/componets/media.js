@@ -19,7 +19,7 @@ class Media extends PureComponent{
     //     this.setState({ //cambia el estado del componente
     //         author: 'ricardo celis'
     //     })
-    this.props.openModal(this.props);//envia todas las propiedades del video (titulo, cover, autor, src)
+    this.props.openModal(this.props.id);//envia todas las propiedades del video (titulo, cover, autor, src)
     }
     render(){
         let {title, author, cover} = this.props;

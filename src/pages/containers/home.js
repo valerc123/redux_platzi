@@ -6,23 +6,32 @@ import PortalContainer from '../../widgets/containers/portal';
 import Modal from "../../widgets/components/modal";
 import HandleError from "../../error/containers/handleError";
 import VideoPlayer from '../../player/containers/video-player';
-
+import { List as list } from  'immutable';
 import { connect } from 'react-redux';
 
 class Home extends Component{
     state = {
         modalVisible: false
     }
-    handleOpenModal=(media) =>{
-        this.setState({
-            modalVisible: true,
-            media // es lo mismo media: media
+    handleOpenModal=(id/*,media*/) =>{
+        this.props.dispatch({
+            type: 'OPEN_MODAL',
+            payload:{
+                mediaId: id
+            }
         })
+        // this.setState({
+        //     modalVisible: true,
+        //     media: media // es lo mismo media: media
+        // })
     }
     
     handleCloseModal =(event) =>{
-        this.setState({
-            modalVisible: false
+        // this.setState({
+        //     modalVisible: false
+        // })
+        this.props.dispatch({
+            type: 'CLOSE_MODAL'
         })
     }
  render()
@@ -31,17 +40,22 @@ class Home extends Component{
             <HandleError>
                 <HomeLayout>
                     <Related />
-                    <Categories categories={this.props.categories} 
-                    handleOpenModal ={this.handleOpenModal} 
-                    search={this.props.search}/>
+                    <Categories 
+                        categories={this.props.categories} 
+                        handleOpenModal ={this.handleOpenModal} 
+                        search={this.props.search}
+                    />
                     {
-                    this.state.modalVisible &&
+                    this.props.modal.get('visibility') &&
                     <PortalContainer>
-                        <Modal handleClick={this.handleCloseModal}>
+                        <Modal
+                             handleClick={this.handleCloseModal}>
                             <VideoPlayer 
                                 autoplay
-                                src={this.state.media.src}
-                                title={this.state.media.title} />
+                                id ={this.props.modal.get('mediaId')}
+                                // src={this.state.media.src}
+                                // title={this.state.media.title} 
+                                />
                         </Modal>
                     </PortalContainer>
                     } 
@@ -52,13 +66,26 @@ class Home extends Component{
 }  
 
 function mapStateToProps(state, props){
-    const categories = state.data.categories.map((categoryId) => {
-        return state.data.entities.categories[categoryId]
+    const categories = state.get('data').get('categories').map((categoryId) => {
+        return state.get('data').get('entities').get('categories').get(categoryId)
     })
+    let searchResults = list(); // inicializo una lista inmutable
+    const search = state.get('data').get('search');
+    if(search)
+    {   
+        const mediaList = state.get('data').get('entities').get('media'); //devuelve una lista de los elementos de media
+        searchResults = mediaList.filter((item) => {
+          return  item.get('author').toLowerCase().includes(search.toLowerCase())// comparo si el nombre de autor es el mismo a la de la busqueda
+        }).toList(); // toList, me convierte un mapa a una lista inmutable
+    }
     return{
         categories:  categories, //state.data.categories // data desde el store de redux
-        search: state.search
+        // search: state.get('data').get('search')
+        search: searchResults,
+        modal: state.get('modal'),
     }
 }
 
 export default connect(mapStateToProps)(Home)
+
+
