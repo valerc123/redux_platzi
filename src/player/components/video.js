@@ -34,7 +34,6 @@ class Video extends Component{
         return(
             <div className="Video">
                 <video
-                muted
                     src={this.props.src}
                     autoPlay={this.props.autoplay}
                     ref={this.setRef}

@@ -1,5 +1,6 @@
 import normalizedData from '../schemas/index';
 import { fromJS } from 'immutable'
+import {SEARCH_ENTITTIES} from '../action-types/index';
 
 const initialState =  fromJS({
     entities: normalizedData.entities,
@@ -9,7 +10,7 @@ const initialState =  fromJS({
 
 function data(state = initialState, action){
     switch (action.type){
-        case 'SEARCH_VIDEO':{
+        case SEARCH_ENTITTIES:{
 
            // action.payload.query = el valor que ingresan en el input
             let results = [];

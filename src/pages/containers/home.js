@@ -7,32 +7,38 @@ import Modal from "../../widgets/components/modal";
 import HandleError from "../../error/containers/handleError";
 import VideoPlayer from '../../player/containers/video-player';
 import { List as list } from  'immutable';
+import * as  actions from '../../actions/index';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class Home extends Component{
-    state = {
-        modalVisible: false
-    }
-    handleOpenModal=(id/*,media*/) =>{
-        this.props.dispatch({
-            type: 'OPEN_MODAL',
-            payload:{
-                mediaId: id
-            }
-        })
+  
+    handleOpenModal = (id /*,media*/) =>{
+       this.props.actions.openModal(id) // uso la accion global
+
+        // this.props.dispatch({  //mando esta accion a las acciones globales
+        //     type: 'OPEN_MODAL',
+        //     payload:{
+        //         mediaId: id
+        //     }
+        // })
+
         // this.setState({
         //     modalVisible: true,
         //     media: media // es lo mismo media: media
         // })
     }
     
-    handleCloseModal =(event) =>{
+    handleCloseModal = (event) =>{
+        this.props.actions.closeModal()
+        
+        // this.props.dispatch({
+        //     type: 'CLOSE_MODAL'
+        // })
+
         // this.setState({
         //     modalVisible: false
         // })
-        this.props.dispatch({
-            type: 'CLOSE_MODAL'
-        })
     }
  render()
     {
@@ -85,7 +91,12 @@ function mapStateToProps(state, props){
         modal: state.get('modal'),
     }
 }
+function mapDispatchToProps(dispatch){
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 

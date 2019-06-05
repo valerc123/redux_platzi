@@ -1,0 +1,21 @@
+import { OPEN_MODAL, CLOSE_MODAL, SEARCH_ENTITTIES } from '../action-types/index'
+
+export function openModal(mediaId){
+    return{
+        type: OPEN_MODAL,
+        payload: {
+            mediaId
+        }
+    }
+}
+export function closeModal(){
+    return{
+        type: CLOSE_MODAL,
+    }
+}
+export function searchEntities(query){
+    return{
+        type: SEARCH_ENTITTIES ,
+        payload: { query }
+    }
+} 

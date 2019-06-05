@@ -10,7 +10,7 @@ function Categories(props)
         <div className="Categories">
             <SearchContainer  />
                 {
-                    props.search.map((item)=>{
+                    props.search.map( item =>{
                         return <Media
                                     openModal = {props.handleOpenModal}
                                     title  = {item.get('title')}
@@ -19,6 +19,7 @@ function Categories(props)
                                     cover  = {item.get('cover')}
                                     src    = {item.get('src')}
                                     key    = {item.get('id')}
+                                    id     = {item.get('id')}
                                 />
                     })
                 }

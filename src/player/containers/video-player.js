@@ -10,9 +10,10 @@ import ProgressBar from '../components/progress-bar';
 import Spinner from '../components/spinner';
 import Volumen from '../components/volumen';
 import FullScreen from '../components/fullscreen';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 class VideoPlayer extends Component {
+    
     state={
         pause: true,
         duration: 0,
@@ -134,9 +135,12 @@ class VideoPlayer extends Component {
         )
     }
 }
+
+
 function mapStateToProps(state, props){
     return{
-        media: state.get('data').get('entities').get('media').get(props.id)
+        media: state.get('data').get('entities').get('media').get(props.id),
+        // media: state.getIn(['data','entities','media',props.id])
     }
 }
 export default connect(mapStateToProps)(VideoPlayer);
